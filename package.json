@@ -1,0 +1,22 @@
+{
+  "name": "rotten_tomatoes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoeSuzuki/Rotten_Tomatoes.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoeSuzuki/Rotten_Tomatoes/issues"
+  },
+  "homepage": "https://github.com/JoeSuzuki/Rotten_Tomatoes#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
