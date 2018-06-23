@@ -1,6 +1,9 @@
 const express = require('express')
 const app = express()
+const mongoose = require('mongoose');
 var exphbs = require('express-handlebars');
+
+mongoose.connect('mongodb://localhost/rotten-potatoes', { useMongoClient: true });
 
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
