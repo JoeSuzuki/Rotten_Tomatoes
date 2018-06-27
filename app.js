@@ -26,6 +26,10 @@ app.get('/', (req, res) => {
   })
 })
 
+app.get('/reviews/new', (req, res) => {
+  res.render('reviews-new', {});
+})
+
 app.listen(3000, () => {
   console.log('App listening on port 3000!')
 })
