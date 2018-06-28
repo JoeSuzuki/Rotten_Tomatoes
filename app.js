@@ -2,11 +2,13 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose');
 var exphbs = require('express-handlebars');
+const bodyParser = require('body-parser');
 
 mongoose.connect('mongodb://localhost/rotten-tomatoes', { useMongoClient: true });
 
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const Review = mongoose.model('Review', {
   title: String
@@ -24,6 +26,11 @@ app.get('/', (req, res) => {
   }).catch((err) => {
     console.log(err);
   })
+})
+
+app.post('/reviews', (req, res) => {
+  console.log(req.body);
+  // res.render('reviews-new', {});
 })
 
 app.get('/reviews/new', (req, res) => {
