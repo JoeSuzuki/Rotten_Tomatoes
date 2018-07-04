@@ -43,6 +43,15 @@ app.get('/reviews/new', (req, res) => {
   res.render('reviews-new', {});
 })
 
+// SHOW
+app.get('/reviews/:id', (req, res) => {
+  Review.findById(req.params.id).then((review) => {
+    res.render('reviews-show', { review: review })
+  }).catch((err) => {
+    console.log(err.message);
+  })
+})
+
 app.listen(3000, () => {
   console.log('App listening on port 3000!')
 })
