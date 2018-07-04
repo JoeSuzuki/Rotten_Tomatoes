@@ -52,6 +52,13 @@ app.get('/reviews/:id', (req, res) => {
   })
 })
 
+//EDIT
+app.get('/reviews/:id/edit', function (req, res) {
+  Review.findById(req.params.id, function(err, review) {
+    res.render('reviews-edit', {review: review});
+  })
+})
+
 app.listen(3000, () => {
   console.log('App listening on port 3000!')
 })
