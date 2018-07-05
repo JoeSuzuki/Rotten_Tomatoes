@@ -1,10 +1,10 @@
 const express = require('express')
 const methodOverride = require('method-override')
 const app = express()
-const mongoose = require('mongoose');
 var exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 
+var mongoose = require('mongoose');
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/rotten-tomatoes');
 
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
