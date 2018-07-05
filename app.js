@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 var exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 
-mongoose.connect('mongodb://localhost/rotten-tomatoes', { useMongoClient: true });
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/rotten-tomatoes');
 
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
