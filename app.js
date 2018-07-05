@@ -3,10 +3,12 @@ const methodOverride = require('method-override')
 const app = express()
 var exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
+
+// MODELS
 const Comment = require('./models/comment')
 const Review = require('./models/review')
 
-
+// SETUP MONGODB
 var mongoose = require('mongoose');
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/rotten-tomatoes');
 
@@ -15,6 +17,7 @@ app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'))
 
+// HOME
 app.get('/', (req, res) => {
   Review.find().then((reviews) => {
     res.render('reviews-index', {reviews: reviews});
@@ -23,6 +26,7 @@ app.get('/', (req, res) => {
   })
 })
 
+// REVIEW 
 app.post('/reviews', (req, res) => {
   Review.create(req.body).then((review) => {
     console.log(review)
@@ -32,6 +36,7 @@ app.post('/reviews', (req, res) => {
   })
 })
 
+// NEW REVIEW
 app.get('/reviews/new', (req, res) => {
   res.render('reviews-new', {});
 })
