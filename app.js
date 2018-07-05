@@ -3,6 +3,9 @@ const methodOverride = require('method-override')
 const app = express()
 var exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
+const Comment = require('./models/comment')
+const Review = require('./models/review')
+
 
 var mongoose = require('mongoose');
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/rotten-tomatoes');
@@ -11,18 +14,6 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'))
-
-const Review = mongoose.model('Review', {
-  title: String,
-  description: String,
-  movieTitle: String
-});
-
-// let reviews = [
-//   { title: "Great Review" },
-//   { title: "Awesome Review" },
-//   { title: "Next Review" }
-// ]
 
 app.get('/', (req, res) => {
   Review.find().then((reviews) => {
@@ -78,6 +69,11 @@ app.delete('/reviews/:id', function (req, res) {
   }).catch((err) => {
     console.log(err.message);
   })
+})
+
+// NEW Comment
+app.post('/reviews/comment', (req, res) => {
+  res.send('reviews comment')
 })
 
 app.listen(process.env.PORT || 8888, () => {
