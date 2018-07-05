@@ -38,10 +38,14 @@ app.get('/reviews/new', (req, res) => {
 
 // SHOW
 app.get('/reviews/:id', (req, res) => {
-  Review.findById(req.params.id).then((review) => {
-    res.render('reviews-show', { review: review })
+  const findReviews = Review.findById(req.params.id)
+  const findComments = Comment.find({ reviewId: Object(req.params.id) })
+
+  Promise.all([findReviews, findComments]).then((values) => {
+    console.log(values)
+    res.render('reviews-show', { review: values[0], comments: values[1] })
   }).catch((err) => {
-    console.log(err.message);
+    console.log(err.message)
   })
 })
 
@@ -73,7 +77,11 @@ app.delete('/reviews/:id', function (req, res) {
 
 // NEW Comment
 app.post('/reviews/comment', (req, res) => {
-  res.send('reviews comment')
+  Comment.create(req.body).then((comment) => {
+    res.redirect('/reviews/' + comment.reviewId)
+  }).catch((err) => {
+    console.log(err.message)
+  })
 })
 
 app.listen(process.env.PORT || 8888, () => {
